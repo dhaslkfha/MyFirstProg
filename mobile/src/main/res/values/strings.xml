@@ -1,9 +1,0 @@
-<resources>
-    <string name="app_name">MyFirstProg</string>
-    <string name="helloworld">Hello World</string>
-    <string name="okbutton">确定</string>
-    <string name="title_activity_enter_acitivty">EnterAcitivty</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-</resources>
