@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<title>用电申请</title>
+<script>
+(function(win,doc){
+	function change(){
+		document.documentElement.style.fontSize=document.documentElement.clientWidth/16+'px';
+	}
+
+	win.addEventListener('resize',change,false);
+	win.addEventListener('DOMContentLoaded',change,false);
+
+})(window,document);
+
+</script>
+</head>
+
+<body>
+<!--header-->
+<div class="head">
+	<div class="left_ico"><img src="images/img_03.png"  /></div>
+    <div class="mid">用电申请</div>
+    <div class="right_ico"><img src="images/img_06.png"  /></div>
+</div>
+
+
+<div class="sqlist">
+   <ul>
+     <li id="qysqBtn">
+     <span class="sqlist_l"><img src="images/img_qyyd.png"/></span><span  class="sqlist_c">企业用电</span><span  class="sqlist_r"><img src="images/elec_04.png"/></span>
+     </li>
+     <li id="grsqBtn">
+     <span class="sqlist_l"><img src="images/img_gryd.png"/></span><span  class="sqlist_c">个人用电</span><span  class="sqlist_r"><img src="images/elec_04.png"/></span>
+     </li>
+   </ul>
+</div>
+
+<div class="sq_ts">
+<h3>温馨提示</h3>
+<p>低压办电适用于申请电压等级为<i>220伏或380伏的用电项目。</i></p>
+<p>(1)个人办电适用于一般居民住宅用电的办电申请。</p>
+<p>(2)企业办电适用于一般企事业单位及商业用电的办电申请。</p>
+<p>(3)如有其他问题，请拔打<i>95598</i>热线咨询。</p>
+</div>
+
+<script src="js/common.js"></script> 
+<script type="text/javascript">
+
+var bridge=null;
+var qysqBtn=document.querySelector("#qysqBtn");
+var grsqBtn=document.querySelector("#grsqBtn");
+
+var jsonkhxx="";
+
+window.onload = function() {
+   if(iosand()!='ios')
+   {
+	  //模块首页，h5向原生调用初始化方法fromJsFunction_init
+	  //安卓json形式的字符串
+	  var data='{"order":"getConsInfo"}';
+	  window.sgcc.fromJsFunction_init(data);
+   }
+
+}
+
+function showJsoninit(str){
+	alert(str)
+	    //第一次获取客户信息
+		jsonkhxx=eval('('+str+')');
+	
+}
+
+
+
+if(iosand()=='ios')
+{
+	document.addEventListener('WebViewJavascriptBridgeReady', onBridgeReady, false)
+	function onBridgeReady(event) {
+        var bridge = event.bridge;
+        var uniqueId = 1;
+        var data = null;
+        bridge.send(data, function (responseData) {
+        });
+		bridge.init(function (message, responseCallback) {
+		});
+		
+	  //第一次请求用户编号
+      bridge.callHandler('fromJsFunction_init', 
+                 {"order":"getConsInfo"}, 
+                 function callback(response) {
+                   
+				   jsonkhxx=eval('('+response+')');
+		
+	    
+				}
+        )
+		
+	  
+	  //企业用电按钮
+	   qysqBtn.onclick=function(){
+           anyBtn={"type":3,"url":"list.html","param":{"requestCode":"GDT08091","versionCode":"1.1","data":{"userId":jsonkhxx["data"]["consNo"],'statusCode':'0,1,2,3,4','custType':'02'}}}
+           bridge.callHandler('fromJsFunction_jump',
+                   anyBtn,
+                   function callback(response) {
+
+                   })
+       }
+       grsqBtn.onclick=function(){
+	       anyBtn={"type":3,"url":"list.html","param":{"requestCode":"GDT08091","versionCode":"1.1","data":{"userId":jsonkhxx["data"]["consNo"],'statusCode':'0,1,2,3,4','custType':'01'}}}
+           bridge.callHandler('fromJsFunction_jump',
+                   anyBtn,
+                   function callback(response) {
+
+                   })
+       }
+	
+	}
+   
+}
+else
+{
+    qysqBtn.onclick=function(){
+		 anyBtn='{"type":3,"url":"list.html","param":{"requestCode":"GDT08091","versionCode":"1.1","data":{"userId":'+jsonkhxx["data"]["consNo"]+',"statusCode":"0,1,2,3,4","custType":"02"}}}';
+		
+		window.sgcc.fromJsFunction_jump(anyBtn);		
+	};
+	
+	grsqBtn.onclick=function(){
+		 anyBtn='{"type":3,"url":"list.html","param":{"requestCode":"GDT08091","versionCode":"1.1","data":{"userId":'+jsonkhxx["data"]["consNo"]+',"statusCode":"0,1,2,3,4","custType":"01"}}}';
+		
+		window.sgcc.fromJsFunction_jump(anyBtn);		
+	};
+
+}
+
+
+</script>
+</body>
+</html>
+
+

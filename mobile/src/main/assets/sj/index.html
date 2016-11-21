@@ -1,0 +1,299 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<title>电费电量</title>
+<script>
+;(function(win,doc){
+	function change(){
+		document.documentElement.style.fontSize=document.documentElement.clientWidth/16+'px';
+	}
+
+	win.addEventListener('resize',change,false);
+	win.addEventListener('DOMContentLoaded',change,false);
+
+})(window,document);
+
+</script>
+</head>
+
+<body>
+<!--header-->
+<div class="head">
+	<div class="left_ico"><img src="images/img_03.png" id="fhBtn" /></div>
+    <div class="mid">电量电费</div>
+    <div class="right_ico"><img src="images/img_06.png" id="shareBtn" /></div>
+</div>
+
+<!--kehuxinxi-->
+<div class="khxx">
+	<div class="khxx_left">
+    	<img src="images/user.png" />
+    </div>
+    <div class="khxx_rt">
+    	<p class="khxx_tit name"></p>
+        <p class="bihao">客户编号 <em></em></p>
+        <p class="dizhi">用户地址 <em id=demo><em id=demo1></em><em id=demo2></em></em></p>
+    </div>
+</div>
+<!--yibiaopan-->
+<div class="ybp_con clearfix">
+	  <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div class="con">
+    	<div id="main" style="height:280px;width:100%;margin:0 auto; padding-top:10px;border:0;"></div>
+  		<div id="box" class="box">
+  			<!-- <img src="1.png" alt=""><img src="2.png" alt=""><img src="3.png" alt=""> -->
+		</div>
+    </div>
+    <!--jieti-->
+    <div class="jieti">
+    	<ol class="jieti_1">
+            <li class="jt_1"><span></span>第一阶梯</li>
+            <li class="jt_2"><span></span>第二阶梯</li>
+            <li class="jt_3"><span></span>第三阶梯</li>
+        </ol>
+        <table cellpadding="0" cellspacing="0" border="0" class="jtTable">
+        	<tr>
+            	<td class="dl_month"><em></em>月电量</td>
+                <td class="fl_du"><em></em>度</td>
+                <td class="dl_compare"></td>
+                <td class="dl_ds"><em></em></td>
+            </tr>
+            <tr>
+            	<td class="df_month"><em></em>月电费</td>
+                <td class="df_yuan"><em></em>元</td>
+                <td class="df_compare"></td>
+                <td class="df_ds"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+<!--历史用电btn-->
+<div class="jt_lsyd">
+    <a href="javascript:;" id="lsydBtn">
+        <span class="fl">历史用电</span>
+        <span class="fr">详情&gt;&gt;</span>
+    </a>
+</div>
+
+ <script src="js/echarts-all.js"></script>
+ <script src="js/ybp.js"></script>
+ <script src="js/common.js"></script>
+ <script type="text/javascript">
+ 
+var lsydBtn=document.querySelector("#lsydBtn");
+var fhBtn=document.querySelector("#fhBtn");
+var shareBtn=document.querySelector("#shareBtn");
+
+
+
+window.onload = function() {
+   if(iosand()!='ios')
+   {
+	  var data="close|1"; //h5向后台所传参数
+	  window.sgcc.fromJsFunction(data);
+   }
+
+}
+function showJson(str){
+	
+	
+		json=eval('('+str+')');
+		showShuju(json);
+		
+}
+
+
+if(iosand()=='ios')
+{
+	
+	
+    document.addEventListener('WebViewJavascriptBridgeReady', onBridgeReady, false)
+	function onBridgeReady(event) {
+        var bridge = event.bridge;
+        var uniqueId = 1;
+        var data = null;
+        bridge.send(data, function (responseData) {
+        });
+		
+		var anyBtn;
+	    lsydBtn.onclick=function(){
+		   anyBtn="lsjl";
+		   bridge.send(anyBtn, function (responseData) {
+			});
+		}
+		
+		fhBtn.onclick=function(){
+		   fhBtn="back";
+		   bridge.send(fhBtn, function (responseData) {
+			});
+		}
+		
+		shareBtn.onclick=function(){
+		   shareBtn="share";
+		   bridge.send(shareBtn, function (responseData) {
+			});
+		}
+		
+		bridge.init(function (message, responseCallback) { 
+			  var json=eval('('+message+')');
+			  showShuju(json);
+		});
+	}
+	
+}else
+{
+	var anyBtn;
+	lsydBtn.onclick=function(){
+		anyBtn="lsjl";
+		window.sgcc.fromJsFunction(anyBtn);		
+	};
+	fhBtn.onclick=function(){
+		fhBtn="back";
+		window.sgcc.fromJsFunction(fhBtn);		
+	};
+	shareBtn.onclick=function(){
+		shareBtn="share";
+		window.sgcc.fromJsFunction(shareBtn);		
+	};
+} 
+
+
+
+function showShuju(json){
+
+    var demo=document.getElementById("demo");
+	var demo1=document.getElementById("demo1");
+	var demo2=document.getElementById("demo2");
+
+    var oName=document.querySelector('.name');
+	var oBh=document.querySelector('.bihao em');
+	var oAdres=document.querySelector('.dizhi #demo1');
+	var dl_month=document.querySelector('.dl_month em');
+	var fl_du=document.querySelector('.fl_du em');
+	var df_month=document.querySelector('.df_month em');
+	var df_yuan=document.querySelector('.df_yuan em');
+	var dl_compare=document.querySelector('.dl_compare');
+	var dl_ds=document.querySelector('.dl_ds');
+	var df_compare=document.querySelector('.df_compare');
+	var df_ds=document.querySelector('.df_ds');
+	
+	
+	var data=json['Quantity']["quantity"];
+	var data2=json['yueydl']["quantityList"];
+	
+	oName.innerHTML='*'+json['khxx']['transName'].substring(1);
+	oBh.innerHTML=json['khxx']["consNo"];
+	oAdres.innerHTML=json['khxx']["address"].substring(0,6)+'******'+json['khxx']["address"].substring(json['khxx']["address"].length-8)+'。';
+	
+	dl_month.innerHTML=data["lastMonth"];
+	fl_du.innerHTML=data["monthQuantity"];
+	df_month.innerHTML=data["lastMonth"];
+	df_yuan.innerHTML=data["monthElectricity"];
+	
+	
+	//与上个月的值相比较
+	//判断电量
+	var Month=parseInt(data["lastMonth"]);
+	var last=(toDou(Month-1)).toString();
+	var lastDl=null,
+		lastDf=null;
+	
+	for(var i=0; i<data2.length; i++){
+		if(data2[i]["lastMonth"]==last){
+			lastDl=data2[i]["monthQuantity"];
+			lastDf=data2[i]["monthElectricity"];
+		}
+	}
+	dl_compare.innerHTML=comparteToMonth(data["monthQuantity"],lastDl);
+	dl_ds.innerHTML=Math.abs((parseFloat(data["monthQuantity"])-parseFloat(lastDl)).toFixed(2));
+	
+	//判断电费
+	df_compare.innerHTML=comparteToMonth(data["monthElectricity"],lastDf);
+	df_ds.innerHTML=Math.abs((parseFloat(data["monthElectricity"])-parseFloat(lastDf)).toFixed(2));
+	//月份前补0
+	function toDou(n){
+		return n<10 ? "0"+n : ""+n;
+	}
+	//比较函数n:本月m:上个月
+	function comparteToMonth(n,m){
+		if(n-m>0){
+			return "比上月增加";
+		}else{
+			return "比上月减少"
+		}
+	};
+	
+	
+	//仪表盘传入年度电量
+	var zdl=data['yearQuantity'];
+	var lev1Kwh=Number(json["ProdeleInfo"]['lev1Kwh']);
+	var lev2Kwh=Number(json["ProdeleInfo"]['lev2Kwh']);
+	var zdlbl=0;
+	if(zdl>0 && zdl<lev1Kwh)
+	{
+		zdlbl=zdl/lev1Kwh*33;
+	}
+	else if(zdl==lev1Kwh)
+	{
+		zdlbl=33;
+	}
+	else if(zdl>lev1Kwh && zdl<lev2Kwh)
+	{
+		zdlbl=(zdl-lev1Kwh)/(lev2Kwh-lev1Kwh)*33+33;
+	}
+	else if(zdl==lev2Kwh)
+	{
+		zdlbl=66;
+	}
+	else if(zdl>lev2Kwh && zdl<19200)
+	{
+		zdlbl=(zdl-lev2Kwh)/(19200-lev2Kwh)*33+66;
+	}
+	else if(zdl<0)
+	{
+		zdlbl=0;
+	}
+	else if(zdl>=19200)
+	{
+		zdlbl=100;
+	}
+
+
+
+  
+//地址运动
+  var speed=50
+  demo2.innerHTML=demo1.innerHTML
+  function Marquee(){
+  if(demo2.offsetWidth-demo.scrollLeft<=0)
+  demo.scrollLeft-=demo1.offsetWidth
+  else{
+  demo.scrollLeft++
+  }
+  }
+  var MyMar=setInterval(Marquee,speed)
+  demo.onmouseover=function() {clearInterval(MyMar)}
+  demo.onmouseout=function() {MyMar=setInterval(Marquee,speed)}
+ 
+  
+  
+
+	
+  ybp(data['yearQuantity'],zdlbl,lev1Kwh,lev2Kwh)	
+		
+}
+
+
+
+
+ </script>
+</body>
+</html>
+
+

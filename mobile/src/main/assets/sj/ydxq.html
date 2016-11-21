@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">        <!--使用符合 XML 规范的 XHTML 文档,xmlns指命名空间-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<title>用电详情</title>
+<script>
+;(function(win,doc){
+	function change(){
+		document.documentElement.style.fontSize=document.documentElement.clientWidth/16+'px';
+	}
+
+	win.addEventListener('resize',change,false);
+	win.addEventListener('DOMContentLoaded',change,false);
+
+})(window,document);
+
+</script>
+<body>
+<div class="head">
+	<div class="left_ico"><img src="images/img_03.png"  id="fhBtn"/></div>
+    <div class="mid_text">用电详情</div>
+     <div class="right_ico"></div>
+</div>
+
+<div class="ydxq">
+	<div class="ydxq_ico"><img src="images/dk_03.png"></div>
+	<div class="ydxq_xx zydl">总用电量<i>105</i>度</div>
+	<div class="ydxq_ico ydxq_left"><img src="images/dk_06.png"></div>
+	<div class="ydxq_xx zdf">总电费<i>51.27</i>元</div>
+</div>
+<ul class="juti">
+	
+</ul>
+</body>
+</head>
+</html>
+<script src="js/common.js"></script>
+<script>
+
+var fhBtn=document.querySelector("#fhBtn");
+
+window.onload = function() {
+   if(iosand()!='ios')
+   {
+	  var data="close|3"; //h5向后台所传参数
+	  window.sgcc.fromJsFunction(data);
+   }
+
+}
+function showJson(str){
+	
+	alert(str);
+		json=eval('('+str+')');
+		showShuju(json);
+		
+}
+
+
+if(iosand()=='ios')
+{
+	
+	
+    document.addEventListener('WebViewJavascriptBridgeReady', onBridgeReady, false)
+	function onBridgeReady(event) {
+        var bridge = event.bridge;
+        var uniqueId = 1;
+        var data = null;
+        bridge.send(data, function (responseData) {
+        });
+		
+		
+		fhBtn.onclick=function(){
+		   fhBtn="back";
+		   bridge.send(fhBtn, function (responseData) {
+			});
+		}
+		
+		
+		bridge.init(function (message, responseCallback) { 
+			  var json=eval('('+message+')');
+			  showShuju(json);
+		});
+	}
+	
+}else
+{
+	
+	fhBtn.onclick=function(){
+		
+		fhBtn="back";
+		window.sgcc.fromJsFunction(fhBtn);		
+	};
+	
+} 
+
+
+
+
+//
+//   var json={
+//	      "zQuantity":106,
+//		  "zElectricity":55.27,
+//		  "quantityList":[{
+//						"quantityLevel":"一阶用电",
+//						"unitPrice":0.4883,
+//						"monthQuantity":"146",
+//						"monthElectricity":"71.54"
+//						},
+//						{
+//							"quantityLevel":"二阶用电",
+//							"unitPrice":0.4885,
+//							"monthQuantity":"147",
+//							"monthElectricity":"71.58"
+//						}
+//					]
+//	   }
+  
+function showShuju(json){
+alert(json);
+	  var zydl=document.querySelector('.zydl i'); 
+	  var zdf=document.querySelector('.zdf i'); 
+	  var oUl=document.querySelector('.juti'); 
+	  zydl.innerHTML=json["zQuantity"]; 
+	  zdf.innerHTML=json["zElectricity"]; 
+	  
+	  var arr=json["quantityList"];
+	  for(var i=0; i<arr.length; i++){
+		  var oLi=document.createElement('li');
+		  oLi.innerHTML='<span class="left"><p class="top">'+arr[i]["quantityLevel"]+'</p><p class="bot">'+arr[i]["unitPrice"]+'元/度</p></span><span class="mid"><i>'+arr[i]["monthQuantity"]+'</i>度</span><span class="right"><i>'+arr[i]["monthElectricity"]+'</i>元</span>';
+		  
+		  oUl.appendChild(oLi);
+	  }
+}
+</script>

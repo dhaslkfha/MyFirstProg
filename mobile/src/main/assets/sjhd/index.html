@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" id="viewport" content="width=device-width, initial-scale=1">
+<meta name="format-detection" content="telephone=yes"/>
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<title>首页</title>
+<style type="text/css">
+*,:after,:before{box-sizing:border-box}
+body,ul,ol,h1,h2,h3,h4,h5,h6,p,form,fieldset,table,td,img,div,dl,dt,dd,input,textarea,select,label,span{margin:0;padding:0}
+body{margin:0;height:100%;color:#FFF;font:400 12px/1.5 "Helvetica Neue","Luxi Sans","DejaVu Sans",Arial,"Hiragino Sans GB",STHeiti,'Microsoft Yahei',sans-serif;outline:0;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-text-size-adjust:none!important;-ms-text-size-adjust:none!important;text-size-adjust:none!important;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}
+ul,ol{list-style:none}
+a{text-decoration:none}
+a{text-decoration:none;color:inherit}
+.hide{display:none}
+a,label{blr:expression(this.onFocus=this.blur())}
+a,label{outline:0}
+.header{position:relative}
+.header .bgimg{width:100%;height:17.75rem;}
+.header a{display:block;position:absolute;right:1rem;top:1.5rem;z-index:10}
+.header a img{width:1.2768rem;height:1.225rem}
+.share{width:100%;margin-top:.75rem}
+.share img{width:5.475rem;height:1.6rem;margin:0 auto;display:block}
+.bqimg{margin:.75rem 0}
+.bqimg img{width:10.525rem;height:2.675rem;margin:0 auto;display:block}</style>
+</head>
+
+<body>
+<!--header-->
+<div class="header">
+	<img src="bg.png"  class="bgimg"/>
+    <a href="javascript:;" id="closeBtn"><img src="close.png" /></a>
+</div>
+<div class="footer">
+	<div class="share" id="shareBtn"><a href="javascript:;"><img src="share.png" /></a></div>
+	<div class="bqimg"><img src="loading_one_@2x.png" /></div>
+
+</div>
+<script type="text/javascript">	
+	var browser = {
+		versions: function() {
+			var u = navigator.userAgent, app = navigator.appVersion;
+			return {
+				trident: u.indexOf('Trident') > -1, 
+				presto: u.indexOf('Presto') > -1, 
+				webKit: u.indexOf('AppleWebKit') > -1, 
+				gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1,
+				mobile: !!u.match(/AppleWebKit.*Mobile.*/) || !!u.match(/AppleWebKit/), 
+				ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), 
+				android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, 
+				iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, 
+				iPad: u.indexOf('iPad') > -1,
+				webApp: u.indexOf('Safari') == -1 
+			};
+		}(),
+		language: (navigator.browserLanguage || navigator.language).toLowerCase()
+	};
+
+	(function (doc, win) {
+		var docEl = doc.documentElement;
+				var dpr;
+				(browser.versions.android)?dpr=1:dpr = window.devicePixelRatio || 1;
+				var rem = docEl.clientWidth * dpr / 16,
+				scale = 1 / dpr,
+				metaEl = document.querySelector('#viewport'),
+				resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+				recalc = function () {
+					if (!rem) return;
+					docEl.style.fontSize = rem + 'px';//20 * (clientWidth / 320)
+				};
+		if (!doc.addEventListener) return;
+		win.addEventListener(resizeEvt, recalc, false);
+		doc.addEventListener('DOMContentLoaded', recalc, false);
+		metaEl.setAttribute('content', 'width=' + dpr * docEl.clientWidth + ',initial-scale=' + scale + ',maximum-scale=' + scale + ',minimum-scale=' + scale + ',user-scalable=no');
+		docEl.setAttribute('data-dpr', dpr);
+	
+	})(document, window);
+	
+	var shareBtn=document.querySelector("#shareBtn");
+	var closeBtn=document.querySelector("#closeBtn");
+	
+	if (browser.versions.ios || browser.versions.iPhone || browser.versions.iPad) {
+
+		document.addEventListener('WebViewJavascriptBridgeReady', onBridgeReady, false)
+		function onBridgeReady(event) {
+			var bridge = event.bridge;
+			var anyBtn;
+			shareBtn.onclick = function () {
+				anyBtn="share|下载“掌上电力”，参与有奖活动吧|“掌上电力”开展限时优惠活动，数量有限，先到先得，马上行动哟！";
+				bridge.send(anyBtn, function (responseData) {
+				});
+			}
+			closeBtn.onclick = function () {
+				anyBtn = "close";
+				bridge.send(anyBtn, function (responseData) {
+				});
+
+			}
+		}
+	}else if (browser.versions.android){
+		var anyBtn;
+		shareBtn.onclick=function(){
+			anyBtn="share|下载“掌上电力”，参与有奖活动吧|“掌上电力”开展限时优惠活动，数量有限，先到先得，马上行动哟！";
+			window.sgcc.fromJsFunction(anyBtn);
+		}
+		closeBtn.onclick=function(){
+			anyBtn="close";
+			window.sgcc.fromJsFunction(anyBtn);
+		}
+	}
+
+</script>
+</body>
+<script type="text/javascript" language="javascript">
+	function methodInJs(data){
+		alert("这个窗口是对话框！"+data);
+    }
+</script>
+</html>

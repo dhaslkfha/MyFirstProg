@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" id="viewport" content="width=device-width, initial-scale=1">
+	<meta name="format-detection" content="telephone=yes"/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<title>首页</title>
+	<style type="text/css">
+	*,:after,:before{box-sizing:border-box}
+	body,ul,ol,h1,h2,h3,h4,h5,h6,p,form,fieldset,table,td,img,div,dl,dt,dd,input,textarea,select,label,span{margin:0;padding:0}
+	body{margin:0;height:100%;color:#FFF;font:400 12px/1.5 "Helvetica Neue","Luxi Sans","DejaVu Sans",Arial,"Hiragino Sans GB",STHeiti,'Microsoft Yahei',sans-serif;outline:0;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-text-size-adjust:none!important;-ms-text-size-adjust:none!important;text-size-adjust:none!important;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}
+	ul,ol{list-style:none}
+html{font-size:20px;}
+	a{text-decoration:none}
+	a{text-decoration:none;color:inherit}
+	.hide{display:none}
+	a,label{blr:expression(this.onFocus=this.blur())}
+	a,label{outline:0}
+	.header{position:relative}
+	.header .bgimg{width:100%;height:20.6rem;}
+	.header a{display:block;position:absolute;right:1rem;top:1.5rem;z-index:10}
+	.header a img{width:1.2768rem;height:1.2768rem}
+
+	#closeBtn{display:none;}
+	.bqimg{margin:0.95rem 0 0 0}
+	.bqimg img{width:6.1rem;height:1.575rem;margin:0 auto;display:block}
+    .lh_time{position:absolute;left:3rem;top:10.25rem;}
+	.lh_time dd{ color:#ffe114; line-height:0.8rem; font-size:0.5rem;}
+    .lh_text{position:absolute;left:1rem;top:15.875rem;margin-right:1rem;text-align:Justify}
+    
+    </style>
+    
+    <script>
+	(function(win,doc){
+		function change(){
+			document.documentElement.style.fontSize=document.documentElement.clientWidth/16+'px';
+		}
+	
+		win.addEventListener('resize',change,false);
+		win.addEventListener('DOMContentLoaded',change,false);
+	
+	})(window,document);
+
+</script>
+</head>
+
+<body>
+	<!--header-->
+	<div class="header">
+		<img src="bg.png"  class="bgimg"/>
+		<a href="javascript:;" id="closeBtn"><img src="close.png" /></a>
+        <dl class="lh_time">
+        	<dt>暂停服务</dt>
+            <dd>8月28日 0点</dd>
+            <dd>至9月7号24点</dd>
+        </dl>
+        <div class="lh_text">
+        	<p>为了给您带来更好的使用体验，我单位“掌上电力”手机app进行停机维护，有关业务可到就近营业厅办理。对于本次停机维护安排对您造成的不便我们深表歉意。</p>
+        </div>
+	</div>
+	<div class="footer">
+		<div class="bqimg"><img src="copyright.png"/></div>
+	
+	</div>
+
+	<script type="text/javascript">	
+	var browser = {
+		versions: function() {
+			var u = navigator.userAgent, app = navigator.appVersion;
+			return {
+				trident: u.indexOf('Trident') > -1, 
+				presto: u.indexOf('Presto') > -1, 
+				webKit: u.indexOf('AppleWebKit') > -1, 
+				gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1,
+				mobile: !!u.match(/AppleWebKit.*Mobile.*/) || !!u.match(/AppleWebKit/), 
+				ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), 
+					android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1 || u.indexOf('Huawei') > -1, 
+					iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, 
+					iPad: u.indexOf('iPad') > -1,
+					webApp: u.indexOf('Safari') == -1 
+				};
+			}(),
+			language: (navigator.browserLanguage || navigator.language).toLowerCase()
+		};
+
+
+			var closeBtn=document.querySelector("#closeBtn");
+           closeBtn.style.display='block';	
+	if (browser.versions.ios || browser.versions.iPhone || browser.versions.iPad) {
+		document.addEventListener('WebViewJavascriptBridgeReady', onBridgeReady, false)
+			function onBridgeReady(event) {
+				var bridge = event.bridge;
+				var anyBtn;
+				var data = null;
+				bridge.send(data, function (responseData) {
+		
+				});
+				closeBtn.onclick = function () {
+					anyBtn = "close";
+					bridge.send(anyBtn, function (responseData) {
+					});
+
+				};
+
+				bridge.init(function (message, responseCallback) {   
+					var str=eval('('+message+')');
+					if(str){
+						closeBtn.style.display='block';	
+					}
+				});
+			}
+		}else if (browser.versions.android){
+			var anyBtn;
+			closeBtn.onclick=function(){
+				anyBtn="close";
+				alert(1)
+				window.sgcc.fromJsFunction(anyBtn);
+				alert(2)
+			};
+			//window.sgcc.runOnAndroidJavaScript();
+			function showJson(str){
+				alert(str)
+				//if(str){
+				//	closeBtn.style.display='block';	
+				//}
+			}
+		}
+
+</script>
+		</body>
+		</html>

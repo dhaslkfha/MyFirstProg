@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<title>评价</title>
+<script>
+(function(win,doc){
+	function change(){
+		document.documentElement.style.fontSize=document.documentElement.clientWidth/16+'px';
+	}
+
+	win.addEventListener('resize',change,false);
+	win.addEventListener('DOMContentLoaded',change,false);
+
+})(window,document);
+
+</script>
+</head>
+
+<body>
+<!--header-->
+<div class="head">
+	<div class="left_ico"><img src="images/img_03.png"  /></div>
+    <div class="mid">评价</div>
+    <div class="right_ico"><img src="images/img_06.png"  /></div>
+</div>
+
+<div class="pingjia_n">
+
+      <p class="lbp"><span class="bt">预申请编号：</span><i>201611011111</i></p>
+      <p class="lbp"><span class="bt">客户名称：</span><i>吕布</i></p>
+      <p class="lbp"><span class="bt">用电地址：</span><i class="demo" id="demo1"><i id=demoa1>地址地址地址地址地址地址地址地址地址地址地址123123</i><i id=demob1></i></i></p>
+<p class="xian"></p>
+   </div>
+   
+   <div class="pingjia_n">
+      <div class="star">
+		<span>服务态度：</span>
+		<ul>
+			<li><a href="javascript:;">1</a></li>
+			<li><a href="javascript:;">2</a></li>
+			<li><a href="javascript:;">3</a></li>
+			<li><a href="javascript:;">4</a></li>
+			<li><a href="javascript:;">5</a></li>
+		</ul>
+	</div>
+    <div class="star">
+		<span>相应速度：</span>
+		<ul>
+			<li><a href="javascript:;">1</a></li>
+			<li><a href="javascript:;">2</a></li>
+			<li><a href="javascript:;">3</a></li>
+			<li><a href="javascript:;">4</a></li>
+			<li><a href="javascript:;">5</a></li>
+		</ul>
+	</div>
+    <p class="xian"></p>
+     <textarea placeholder="这里可以写下您的意见哦（不少于10个汉字）"></textarea>
+   </div>
+
+<div class="bdqd"><a class="xybtn">提交评价</a></div>
+
+ <script src="js/jquery-1.10.1.min.js"></script>
+ <script src="js/score.js"></script>
+ 	
+	<script>
+		 $(function(){
+			var score = new Score({
+				callback: function(cfg) {
+					//console.log(cfg.starAmount);
+				}
+			});
+		});
+	</script>
+
+<script>
+  //地址运动
+
+   
+	 sport();
+
+function sport(){  
+  var speed=50;
+  var demob=document.getElementById('demob1');
+  var demoa=document.getElementById('demoa1');
+  var demo=document.getElementById('demo1');
+ // alert(demob);
+  demob.innerHTML=demoa.innerHTML;
+  
+  function Marquee(){
+  if(demob.offsetWidth-demo.scrollLeft<=0)
+  demo.scrollLeft-=demoa.offsetWidth
+  else{
+  demo.scrollLeft++
+  }
+  }
+  var MyMar=setInterval(Marquee,speed)
+  demo.onmouseover=function() {clearInterval(MyMar)}
+  demo.onmouseout=function() {MyMar=setInterval(Marquee,speed)}
+}
+  
+  
+</script>
+
+</body>
+</html>
+
+

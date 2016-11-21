@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+        <color name="order_text_blue">#3ABEA9</color> <!--  蓝色-->
+        <color name="order_bg_green">#41DD5E</color> <!--  绿色-->
+        <color name="order_text_green">#69B3A4</color> <!--  浅绿色-->
+        <color name="list_item_green">#1BBC9A</color> <!--  浅绿色-->
+        <color name="list_item_gray">#EDEDED</color> <!--  浅灰色-->
+        <color name="text_compareHighestLoad">#ff798f</color> <!-- 橘红色 -->
+        <color name="text_highestLoad">#fe6c36</color> <!-- 橘红色 -->
+        <color name="white">#FFFFFF</color> <!-- 白 -->
+        <color name="common_green">#1bbc9b</color> <!-- 通绿用 -->
+        <color name="common_blue">#0000ff</color><!-- 邮箱 -->
+        <color name="tomato">#FF6347</color> <!-- 番茄红 -->
+        <color name="powderblue">#B0E0E6</color> <!-- 火药青 -->
+        <color name="ivory">#FFFFF0</color> <!-- 象牙白 -->
+        <color name="listdriver">#A8A8A8</color> <!-- 灰 -->
+        <color name="listdriver_msg_order">#E5E8EC</color>
+        <color name="floralwhite">#FFFAF0</color> <!-- 花白 -->
+        <color name="transparent">@android:color/transparent</color> <!-- 透明 -->
+        <!-- 文字颜色 -->
+
+        <drawable name="myactivity_dialog">#32000000</drawable>
+        <drawable name="myactivity_dialog2222">#32000000</drawable>
+
+        <color name="dialog_color">#00000000</color>
+        <color name="text_gray">#666666</color>
+        <color name="text_green">#3fe082</color>
+        <color name="text_black">#333333</color>
+        <color name="text_black_dan">#626262</color>
+        <color name="text_white">#FFFFFF</color>
+        <color name="text_blue">#00A0E9</color>
+        <color name="text_blue1">#0054a1</color>
+        <color name="text_yellow">#E9C21D</color>
+        <color name="text_home_own">#F7AB00</color><!-- 首页表内余额颜色 -->
+        <color name="text_green1">#74A63B</color>
+        <color name="light_blue">#CDF0FA</color>
+        <color name="imageButton_background">#00ffffff</color>
+        <color name="transferm">#00000000</color>
+        <color name="mypop_color">#003839</color>
+        <color name="prompt_text_gray1">#888888</color>
+        <color name="prompt_text_gray2">#9F9F9F</color>
+        <color name="prompt_text_green">#6AC863</color>
+        <color name="prompt_text_black">#4B4A4A</color>
+        <color name="prompt_text_style">#0FA690</color>
+        <!-- 输入框提示文字颜色 -->
+        <color name="text_hint">#cccccc</color>
+        <!-- 背景颜色 -->
+        <color name="color_green">#5fff00</color>
+        <color name="color_blue">#20B2AA</color>
+        <color name="color_red">#f44f0f</color>
+        <color name="background_f0f4f5">#f0f4f5</color>
+        <color name="back_grid">#F0EFF5</color>
+        <color name="background_electry">#DFF9F1</color>
+
+        <color name="text_RGB676767">#676767</color>
+        <color name="devier">#e0ded7</color>
+        <color name="item_selected">#B0DFEF</color>
+        <color name="head_color">#1bbc9b</color>
+
+        <!-- 透明背景 -->
+        <drawable name="translucent_color">#50000000</drawable>
+
+        <!-- 网点 -->
+        <color name="pop_title_color">#F56B24</color>
+
+        <!-- 电量电费阶梯 -->
+        <color name="jtpower">#333333</color>
+        <color name="firstladderpower">#4edf73</color>
+        <color name="secondladderpower">#fdc101</color>
+        <color name="thridladderpower">#fe6c36</color>
+        <color name="electricityprogressbar">#cccccc</color>
+
+
+
+        <!-- 进度查询 -->
+        <color name="top_tag_green">#4EE073</color>
+        <color name="top_tag_red">#FA6E23</color>
+        <color name="top_tag_gray">#BBB9BA</color>
+        <!-- 用电分析 -->
+        <color name="bar_color">#2dcd70</color>
+        <color name="line_blue">#498bdc</color>
+        <color name="line_green">#2fcb72</color>
+        <color name="Black_black">#FF000000</color>
+
+        <color name="h_pro_line">#e3e9ec</color>
+        <color name="spilt" >#e5e5e5</color>
+        <color name="gray1" > #C0C0C0</color>
+        <color name="gray2" > #7F7F7F</color>
+
+        <color name="umspay_transparent">#00FF00FF</color>
+
+        <drawable name="umspay_myactivity_dialog">#32000000</drawable>
+        <drawable name="umspay_myactivity_dialog2222">#32000000</drawable>
+        <color name="umspay_text_color">#6f7e9d</color>
+        <color name="black">#000000</color> <!-- 黑色 -->
+        <color name="gray">#606060</color> <!-- 灰色 -->
+
+
+</resources>
